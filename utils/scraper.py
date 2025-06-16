@@ -19,7 +19,6 @@ class Scraper:
             url = self.base_url
         response = self.session.get(url, headers = {'User-Agent': 'Popular browser\'s user-agent',})
         soup = BeautifulSoup(response.text, "html.parser")
-        self.close()
         return soup
     
     def update_page_number(self, page_number):
@@ -89,7 +88,7 @@ class Scraper:
                 "city": cleaned_full_address.get("city", ""),
                 "url": full_link
             }
-        self.close()
+        
         return data
             
     def clean_address(self, full_address):
