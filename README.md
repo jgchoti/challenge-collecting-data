@@ -30,7 +30,7 @@ Run the main scraper script:
 python main.py
 ```
 
-This will start scraping property data from Zimmo.be, collecting pages and property details concurrently, and save the final cleaned dataset as `properties.csv`
+This will start scraping property data from Zimmo.be, collecting pages and property details concurrently, and save the final cleaned dataset as `properties{MMDDHHMM}.csv`
 
 ## What Went Well / Challenges
 
