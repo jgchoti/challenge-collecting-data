@@ -9,6 +9,10 @@ from utils.retriever import Retriever
 from utils.config import ALL_KEYS
 import random
 import certifi
+from http.client import RemoteDisconnected
+from fake_useragent import UserAgent
+
+
 class Scraper:
     def __init__(self, page: int = 1):
         self.page = page
@@ -20,12 +24,16 @@ class Scraper:
         
     def close(self):
         self.session.close()
-
+        
+    def get_user_agent(self):
+        ua = UserAgent(platforms='desktop')
+        return ua.random
+        
     def open_page(self, url):
-        headers = {
+        try:
+            headers = {
         'User-Agent': (
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) '
-            'Gecko/20100101 Firefox/115.0'
+          self.get_user_agent()
         ),
         'Accept': (
             'text/html,application/xhtml+xml,application/xml;q=0.9,'
@@ -35,17 +43,19 @@ class Scraper:
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         'Connection': 'keep-alive',
         }
-
-        response = self.session.get(url, headers=headers)
-        time.sleep(random.uniform(1, 3))
-        if response.status_code != 200:
-            print(f"❌ Failed to reach {url}")
+            response = self.session.get(url, headers=headers)
+            time.sleep(random.uniform(1, 3))
+            if response.status_code != 200:
+                print(f"❌ Failed to reach {url}")
+                return False
+            else:
+                print(f"✅ Accessed {url}")
+                soup = BeautifulSoup(response.text, 'html.parser')
+                return soup
+        except RemoteDisconnected:
+            print(f"🔌 RemoteDisconnected: Server closed connection for {url}")
             return False
-        else:
-            print(f"✅ Accessed {url}")
-            soup = BeautifulSoup(response.text, 'html.parser')
-            return soup
-
+     
     def update_page_number(self, page_number, url):
         if page_number == 1:
             return url
@@ -72,8 +82,7 @@ class Scraper:
         
         headers = {
             'User-Agent': (
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) '
-            'Gecko/20100101 Firefox/115.0'
+            self.get_user_agent()
         ),
         'Accept': (
             'text/html,application/xhtml+xml,application/xml;q=0.9,'
@@ -110,9 +119,13 @@ class Scraper:
         feature["epc"]  = Cleaner.remove_non_digits(feature["epc"]) if feature.get("epc") else None
         feature['renovatieplicht'] = Cleaner.cleaned_renovation_obligation(feature['renovatieplicht']) if feature.get('renovatieplicht') else None
         feature['ki'] = Cleaner.cleaned_price(feature['ki']) if feature.get('ki') else None
-        year_value = feature.get("bouwjaar")
-        feature['bouwjaar'] = str(Cleaner.remove_non_digits(year_value)) if year_value else None
         
+        year_value = feature.get("bouwjaar")
+        cleaned = Cleaner.remove_non_digits(year_value) if year_value else None
+        if cleaned:
+            feature['bouwjaar'] = str(cleaned)
+        else:
+            feature['bouwjaar'] = None
         
         data = {
             "type": feature.get("type"),
