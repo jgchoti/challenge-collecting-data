@@ -3,6 +3,7 @@ from utils.scraper import Scraper
 from utils.scrapethread import ScrapeThread
 from utils.output import Output
 import time
+from datetime import datetime
 from utils.config import BASE_URL
 
 def get_properties_each_page(properties_url):
@@ -22,15 +23,18 @@ def get_properties_each_page(properties_url):
 
 def main():
     print("\n🔍 Getting data...")
+    date = datetime.now()
+    fd = date.strftime("%m%d%I%M")
+    filename = f"properties{fd}.csv"
     start = time.perf_counter()
     scraper = Scraper()
     output = Output()
     first_write = True
     
-    for url in BASE_URL:
+    for key, val in BASE_URL.items():
         page = 1
         while True:
-            current_url = scraper.update_page_number(page, url)
+            current_url = scraper.update_page_number(page, val)
             soup = scraper.open_page(current_url)
             if not soup:
                 break
@@ -38,11 +42,11 @@ def main():
             properties_url = scraper.get_links(soup)
             
             if not properties_url:
-                print("No more properties found. next main base url")
+                print(f"🏷️ Done scraping listings in price range :{key}")
                 break
             
             results = get_properties_each_page(properties_url)
-            output.save_to_csv(results, overwrite=first_write)
+            output.save_to_csv(filename,results, overwrite=first_write)
             first_write = False
             
             scraper.properties_data.update(results)
