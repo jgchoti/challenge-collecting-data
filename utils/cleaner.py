@@ -68,3 +68,11 @@ class Cleaner:
             if isinstance(value, str) and "op aanvraag »" in value:
                 data[key] = None
         return data 
+    
+    @staticmethod
+    def clean_year(year_value):
+        cleaned = Cleaner.remove_non_digits(year_value) if year_value else None
+        if cleaned:
+            return str(cleaned)
+        else:
+            return None
