@@ -80,8 +80,13 @@ class Scraper:
         return response.content
     
     def process_soup(self, raw_html, full_link):
+        if raw_html is None:
+            print(f"No HTML content received from {full_link}")
+            return None
+        
         soup = BeautifulSoup(raw_html, "html.parser")
         retrieve = Retriever(soup)
+        
         # get zimmo code
         zimmo_code = retrieve.get_zimmo_code()
         cleaned_zimmo_code = Cleaner.clean_zimmo_code(zimmo_code) if zimmo_code else None
