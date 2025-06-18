@@ -21,16 +21,8 @@ def get_properties_each_page(properties_url):
 
     return results
 
-def main():
-    print("\n🔍 Getting data...")
-    date = datetime.now()
-    fd = date.strftime("%m%d%I%M")
-    filename = f"properties{fd}.csv"
-    start = time.perf_counter()
-    scraper = Scraper()
-    output = Output()
+def scrap_price_ranges(scraper, output, filename):
     first_write = True
-    
     for key, val in BASE_URL.items():
         page = 1
         while True:
@@ -51,10 +43,20 @@ def main():
             
             scraper.properties_data.update(results)
             print(f"📦 Total properties scraped so far: {len(scraper.properties_data)}")
-            
             page += 1
 
-    scraper.close()
+def main():
+    print("\n🔍 Getting data...")
+    date = datetime.now()
+    fd = date.strftime("%m%d%I%M")
+    filename = f"properties{fd}.csv"
+    start = time.perf_counter()
+    scraper = Scraper()
+    output = Output()
+    try: 
+        scrap_price_ranges(scraper, output, filename)
+    finally: 
+        scraper.close()
     end = time.perf_counter()
     user_input = input(f"\nDo you want preview results? ('y' to confirm):")
     if user_input.lower() == "y":
