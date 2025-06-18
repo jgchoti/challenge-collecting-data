@@ -26,6 +26,7 @@ def scrap_price_ranges(scraper, output, filename):
     for key, val in BASE_URL.items():
         page = 1
         while True:
+            
             current_url = scraper.update_page_number(page, val)
             soup = scraper.open_page(current_url)
             if not soup:
@@ -42,7 +43,8 @@ def scrap_price_ranges(scraper, output, filename):
             first_write = False
             
             scraper.properties_data.update(results)
-            print(f"📦 Total properties scraped so far: {len(scraper.properties_data)}")
+            print(f"\n🔎 Done scraping listings in price range:{key} - Page: {page}")
+            print(f"🗃️ Total properties scraped so far: {len(scraper.properties_data)}")
             page += 1
 
 def main():
@@ -58,7 +60,7 @@ def main():
     finally: 
         scraper.close()
     end = time.perf_counter()
-    user_input = input(f"\nDo you want preview results? ('y' to confirm):")
+    user_input = input(f"\n📖 Do you want preview results? ('y' to confirm):")
     if user_input.lower() == "y":
         output.read_csv()
 

@@ -1,13 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-import re
 import time
 import random
 from utils.cleaner import Cleaner
 from utils.retriever import Retriever
 from utils.config import ALL_KEYS
-import random
 import certifi
 from http.client import RemoteDisconnected
 from fake_useragent import UserAgent
@@ -19,39 +17,32 @@ class Scraper:
         self.properties_data = {}
         self.page_urls = []
         self.seen_url = set()
+        self.ua = UserAgent(platforms='desktop')
+        self.headers = {
+            'User-Agent': self.get_user_agent(),
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "Accept-Encoding": "gzip, deflate",
+            'Connection': 'keep-alive' }
         
     def close(self):
         self.session.close()
         
     def get_user_agent(self):
-        ua = UserAgent(platforms='desktop')
-        return ua.random
+        return self.ua.random
         
     def open_page(self, url):
         try:
-            headers = {
-        'User-Agent': (
-          self.get_user_agent()
-        ),
-        'Accept': (
-            'text/html,application/xhtml+xml,application/xml;q=0.9,'
-            'image/avif,image/webp,*/*;q=0.8'
-        ),
-        "Accept-Encoding": "gzip, deflate",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        'Connection': 'keep-alive',
-        }
+            headers = self.headers
             response = self.session.get(url, headers=headers)
             time.sleep(random.uniform(1, 3))
             if response.status_code != 200:
                 print(f"❌ Failed to reach {url}")
                 return False
             else:
-                print(f"✅ Accessed {url}")
                 soup = BeautifulSoup(response.text, 'html.parser')
                 return soup
         except RemoteDisconnected:
-            print(f"🔌 RemoteDisconnected: Server closed connection for {url}")
+            print(f"🔌 RemoteDisconnected: Server closed connection ")
             return False
      
     def update_page_number(self, page_number, url):
@@ -78,31 +69,19 @@ class Scraper:
         
         self.seen_url.add(full_link )
         
-        headers = {
-            'User-Agent': (
-            self.get_user_agent()
-        ),
-        'Accept': (
-            'text/html,application/xhtml+xml,application/xml;q=0.9,'
-            'image/avif,image/webp,*/*;q=0.8'
-        ),
-   "Accept-Encoding": "gzip, deflate",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        'Connection': 'keep-alive',
-
-}
+        headers = self.headers
         response = self.session.get(full_link, headers = headers, verify=certifi.where())
         time.sleep(random.uniform(1, 3))
         
         if response.status_code != 200:
             print(f"❌ Failed to fetch {full_link }")
-            return None
+            return
         
-        soup = BeautifulSoup(response.content, "html.parser")
-   
-        time.sleep(random.uniform(1, 3))
+        return response.content
+    
+    def process_soup(self, raw_html, full_link):
+        soup = BeautifulSoup(raw_html, "html.parser")
         retrieve = Retriever(soup)
-        
         # get zimmo code
         zimmo_code = retrieve.get_zimmo_code()
         cleaned_zimmo_code = Cleaner.clean_zimmo_code(zimmo_code) if zimmo_code else None

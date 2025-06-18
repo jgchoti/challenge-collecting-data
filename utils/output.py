@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import os
 from utils.config import ALL_KEYS
-
-
 class Output:
     def __init__(self):
         self.columns = ["zimmo code"] + ALL_KEYS
@@ -41,7 +39,7 @@ class Output:
     def output_info(self):
         latest_filename = self.get_latest_filename()
         df = pd.read_csv(latest_filename)
-        print(f"\n📊 Total properties in database: {len(df)}")
+        print(f"\n🏡 Zimmo.be scraping complete — total properties: {len(df)}")
         print("📌 Columns:", list(df.columns))
         
     def get_latest_filename(self):
@@ -49,5 +47,4 @@ class Output:
         data_folder = os.path.join(path, "data")
         filenames_list = os.listdir(data_folder)
         filenames_list.sort(key=os.path.getmtime)
-        
         return filenames_list[-1]
