@@ -11,8 +11,6 @@ import random
 import certifi
 from http.client import RemoteDisconnected
 from fake_useragent import UserAgent
-
-
 class Scraper:
     def __init__(self, page: int = 1):
         self.page = page
@@ -110,7 +108,6 @@ class Scraper:
         cleaned_zimmo_code = Cleaner.clean_zimmo_code(zimmo_code) if zimmo_code else None
 
         feature = retrieve.get_feature_info()
-  
         # print("Extracted keys from feature:", feature.keys())
         feature["prijs"] = Cleaner.cleaned_price(feature["prijs"]) if feature.get("prijs") else None
         address = Cleaner.clean_address(feature.get("adres")) if feature.get("adres") else {}
@@ -119,14 +116,10 @@ class Scraper:
         feature["epc"]  = Cleaner.remove_non_digits(feature["epc"]) if feature.get("epc") else None
         feature['renovatieplicht'] = Cleaner.cleaned_renovation_obligation(feature['renovatieplicht']) if feature.get('renovatieplicht') else None
         feature['ki'] = Cleaner.cleaned_price(feature['ki']) if feature.get('ki') else None
+        feature['bouwjaar'] = Cleaner.clean_year(feature['bouwjaar']) if feature.get('bouwjaar') else None
         
-        year_value = feature.get("bouwjaar")
-        cleaned = Cleaner.remove_non_digits(year_value) if year_value else None
-        if cleaned:
-            feature['bouwjaar'] = str(cleaned)
-        else:
-            feature['bouwjaar'] = None
-        
+        mobiscore = retrieve.get_mobiscore() 
+
         data = {
             "type": feature.get("type"),
             "price": feature.get("prijs"),
@@ -143,6 +136,7 @@ class Scraper:
             "EPC(kWh/m²)": feature.get("epc"),
             "renovation obligation": feature.get("renovatieplicht"),
             "year built" : feature.get('bouwjaar'),
+            "mobiscore" : mobiscore, 
             "url": full_link,
         }
         
