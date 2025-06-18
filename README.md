@@ -12,7 +12,7 @@ This scraper collects extensive property data by navigating through multiple pag
 
 - Scrapes property listings across Belgium, covering many cities and localities.
 - Collects over 10,000 unique property entries without duplicates.
-- Data columns include locality, property type, price, rooms, living area, kitchen status, furnished status, and more.
+- Data columns include locality, property type, price, rooms, living area and more.
 - Handles missing data by filling with None to avoid empty rows.
 - Uses threading to speed up data collection.
 
@@ -34,7 +34,13 @@ This will start scraping property data from Zimmo.be, collecting pages and prope
 
 ## What Went Well / Challenges
 
-- Originally intended to scrape data from Immoweb, but encountered strong access blocks and anti-scraping measures that made it impractical.
-- Pivoted to use Zimmo.be as the data source, which allowed for smoother scraping.
-- Removed Selenium from most requests, using it only when necessary, speeding up scraping with requests.Session.
+- Originally intended to scrape data from `Immoweb.be`, but encountered strong anti-scraping measures that made it impractical.
+- Use `Zimmo.be` as the data source, which allowed for smoother scraping.
+- Removed Selenium from requests, speeding up scraping with requests.Session.
 - Implemented multithreading for concurrency, reducing total runtime.
+- 📊 Handled Zimmo pagination limits:
+  - Zimmo only allows up to 100 pages per query
+  - Resolved by manually created multiple base URLs targeting different price ranges:
+    - Started from €0 up to €1,499,999
+    - In increments of €50,000 per query range
+    - For the final group (starting from €1,499,999), the max limit was left open to capture all remaining properties
