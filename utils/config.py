@@ -35,5 +35,5 @@ ALL_KEYS = [
     "type", "price", "street", "number", "postcode", "city",
     "living area(m²)", "ground area(m²)", "bedroom", "bathroom",
     "garage", "garden", "EPC(kWh/m²)", "renovation obligation",
-    "year built", "url"
+    "year built", "mobiscore", "url"
 ]
