@@ -1,7 +1,7 @@
 class Retriever:
     def __init__(self, soup):
         self.soup = soup
-
+    
     # get zimmo code
     def get_zimmo_code(self):
         zimmo_code_elem = self.soup.find("p", class_="zimmo-code")
@@ -31,3 +31,11 @@ class Retriever:
             return feature
         else:
             return None
+   
+    def get_mobiscore(self):
+        mobiscore_elem = (self.soup.find("span", class_="section-mobiscore_total-score"))
+        if mobiscore_elem:
+            return mobiscore_elem.get_text()
+        else:
+            return None
+    
