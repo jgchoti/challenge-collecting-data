@@ -66,7 +66,7 @@ def main():
 
     output.output_info()
     print(
-        f"==============⏰ Total webs scraping is {end-start:.2} seconds=============\n"
+        f"==============⏰ Total web scraping is {end-start:.2} seconds=============\n"
     )
 
 if __name__ == "__main__":
