@@ -17,6 +17,7 @@ class Scraper:
         self.properties_data = {}
         self.page_urls = []
         self.seen_url = set()
+        self.seen_zimmo_code = set()
         self.ua = UserAgent(platforms='desktop')
         self.headers = {
             'User-Agent': self.get_user_agent(),
@@ -90,6 +91,10 @@ class Scraper:
         
         # get zimmo code
         zimmo_code = retrieve.get_zimmo_code()
+        if zimmo_code in self.seen_zimmo_code:
+            print(f"❌ Skipped duplicated Zimmo-Code: {zimmo_code} ")
+            return
+        
         cleaned_zimmo_code = Cleaner.clean_zimmo_code(zimmo_code) if zimmo_code else None
 
         feature = retrieve.get_feature_info()

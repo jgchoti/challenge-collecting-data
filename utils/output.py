@@ -18,10 +18,9 @@ class Output:
                 df[col] = pd.NA
                 
         df.index.name = "zimmo code"
-
+        
         if overwrite:
             df.to_csv(access_file, index=True)
-            
         else:
             df.to_csv(access_file, mode="a", index=True, header=False)
 
