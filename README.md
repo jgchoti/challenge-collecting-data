@@ -91,4 +91,4 @@ The program ends by displaying the total runtime to fetch the data.
     - Started from €0 up to €1,499,999
     - In increments of €50,000 per query range
     - For the final group (starting from €1,499,999), the max limit was left open to capture all remaining properties
-    - **For future improvement** Use a script to automatically create these links by decoding the search filters from the `base64` string.
+    - **For future improvement** Use a script to automatically create these links by decoding the search filters from the `base64`.
