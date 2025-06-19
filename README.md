@@ -63,15 +63,26 @@ The program will then show output in the terminal
 
 ```
 
-📖 Reading
+📖 Do you want preview results? ('y' to confirm):y
+🔎 Preview data from properties06181030.csv
+  zimmo code                    type    price  ... year built mobiscore                                                url
+0      L9M5W           Chalet (Huis)  49000.0  ...       1986       5.9  /nl/gierle-2275/te-koop/huis/L9M5W/?search=eyJ...
+1      L9W3V           Woning (Huis)  40000.0  ...       <NA>       NaN  /nl/quaregnon-7390/te-koop/huis/L9W3V/?search=...
+2      L5Q5T           Andere (Huis)  45000.0  ...       1850       7.7  /nl/maaseik-3680/te-koop/huis/L5Q5T/?search=ey...
+3      L9KJ7  Eengezinswoning (Huis)  49900.0  ...       <NA>       NaN  /nl/ivoz-ramet-4400/te-koop/huis/L9KJ7/?search...
+4      L9X2H   Vakantiewoning (Huis)  39000.0  ...       1970       5.1  /nl/wechelderzande-2275/te-koop/huis/L9X2H/?se...
 
+[5 rows x 18 columns]
+
+🏡 Zimmo.be scraping complete — total properties: 27918
+📌 Columns: ['zimmo code', 'type', 'price', 'street', 'number', 'postcode', 'city', 'living area(m²)', 'ground area(m²)', 'bedroom', 'bathroom', 'garage', 'garden', 'EPC(kWh/m²)', 'renovation obligation', 'year built', 'mobiscore', 'url']
 ```
 
 The program ends by displaying the total runtime to fetch the data.
 (In the `nice-to-have` branch, this feature is replaced by a progress bar.)
 
 ```
-⌛️ Total
+==============⏰ Total web scraping is 2e+02 seconds=============
 ```
 
 ## What Went Well / Challenges
