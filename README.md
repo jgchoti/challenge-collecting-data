@@ -18,9 +18,9 @@ This scraper collects extensive property data by navigating through multiple pag
 
 ## 🛠 Tech Stack
 
-Language: Python 3
-Libraries: requests, BeautifulSoup4, threading, pandas, re
-Concurrency: Python threading module
+- Language: Python 3
+- Libraries: requests, BeautifulSoup4, threading, pandas, re
+- Concurrency: Python threading module
 
 ## ▶️ Usage
 
@@ -33,7 +33,10 @@ python main.py
 While scraping, the program keeps the user informed after each page loop:
 
 ```
-📦 Total properties scraped so far: 10065
+🔎 Done scraping listings in price range:650000 - 699999 - Page: 57
+🗃️ Total properties scraped so far: 20772
+🏷️ Done scraping listings in price range :650000 - 699999
+
 ```
 
 This will start scraping property data from Zimmo.be, collecting pages and property details concurrently, and save the final cleaned dataset as `properties{MMDDHHMM}.csv`
@@ -67,7 +70,7 @@ The program will also ask user if they want to see preview in their terminal:
 
 [5 rows x 18 columns]
 
-🏡 Zimmo.be scraping complete — total properties: 27918
+🏡 Zimmo.be scraping complete — total properties: 25403
 📌 Columns: ['zimmo code', 'type', 'price', 'street', 'number', 'postcode', 'city', 'living area(m²)', 'ground area(m²)', 'bedroom', 'bathroom', 'garage', 'garden', 'EPC(kWh/m²)', 'renovation obligation', 'year built', 'mobiscore', 'url']
 ```
 
@@ -89,4 +92,4 @@ The program ends by displaying the total runtime to fetch the data.
     - Started from €0 up to €1,499,999
     - In increments of €50,000 per query range
     - For the final group (starting from €1,499,999), the max limit was left open to capture all remaining properties
-    - **For future improvement** Use a script to automatically create these links by decoding the search filters from the `base64` string.
+    - **For future improvement** Use a script to automatically create these links by decoding the search filters from the `base64`.
