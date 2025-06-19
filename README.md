@@ -18,9 +18,9 @@ This scraper collects extensive property data by navigating through multiple pag
 
 ## 🛠 Tech Stack
 
-Language: Python 3
-Libraries: requests, BeautifulSoup4, threading, pandas, re
-Concurrency: Python threading module
+- Language: Python 3
+- Libraries: requests, BeautifulSoup4, threading, pandas, re
+- Concurrency: Python threading module
 
 ## ▶️ Usage
 
