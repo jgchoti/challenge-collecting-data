@@ -79,7 +79,8 @@ class Scraper:
         
         return response.content
     
-    def process_soup(self, raw_html, full_link):
+    def process_soup(self, raw_html, link):
+        full_link = urljoin("https://www.zimmo.be", link)
         if raw_html is None:
             print(f"No HTML content received from {full_link}")
             return None
