@@ -17,8 +17,8 @@ class Output:
             if col not in df.columns:
                 df[col] = pd.NA
                 
-        df.index.name = "zimmo code"
-        
+        df.index.name = "zimmo code"  
+    
         if overwrite:
             df.to_csv(access_file, index=True)
         else:
@@ -38,6 +38,8 @@ class Output:
         data_folder = os.path.join(path, "data")
         access_file = os.path.join(data_folder, filename)
         df = pd.read_csv(access_file)
+        df = df.drop_duplicates(subset=["zimmo code"])
+        df.to_csv(os.path.join(data_folder, filename), index=False)
         print(f"\n🏡 Zimmo.be scraping complete — total properties: {len(df)}")
         print("📌 Columns:", list(df.columns))
         
