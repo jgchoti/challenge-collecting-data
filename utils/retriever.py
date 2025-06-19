@@ -17,7 +17,7 @@ class Retriever:
         if not main_features_section:
             print("⚠️ Could not find 'main-features'")
             return None
-    
+ 
         if main_features_section:
             li_list = main_features_section.find_all("li")
             feature = {}

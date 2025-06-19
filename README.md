@@ -74,7 +74,7 @@ The program will also ask user if they want to see preview in their terminal:
 The program ends by displaying the total runtime to fetch the data.
 
 ```
-==============⏰ Total web scraping is 2e+02 seconds=============
+==============⏰ Total web scraping is 8.4e+03 seconds=============
 ```
 
 ## What Went Well / Challenges
