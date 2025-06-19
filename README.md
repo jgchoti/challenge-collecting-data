@@ -33,7 +33,9 @@ python main.py
 While scraping, the program keeps the user informed after each page loop:
 
 ```
-📦 Total properties scraped so far: 10065
+🔎 Done scraping listings in price range:500000 - 549999 - Page: 61
+🗃️ Total properties scraped so far: 16476
+
 ```
 
 This will start scraping property data from Zimmo.be, collecting pages and property details concurrently, and save the final cleaned dataset as `properties{MMDDHHMM}.csv`
