@@ -33,8 +33,9 @@ python main.py
 While scraping, the program keeps the user informed after each page loop:
 
 ```
-🔎 Done scraping listings in price range:500000 - 549999 - Page: 61
-🗃️ Total properties scraped so far: 16476
+🔎 Done scraping listings in price range:650000 - 699999 - Page: 57
+🗃️ Total properties scraped so far: 20772
+🏷️ Done scraping listings in price range :650000 - 699999
 
 ```
 
