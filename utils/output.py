@@ -7,22 +7,24 @@ class Output:
         self.columns = ["zimmo code"] + ALL_KEYS
 
     def save_to_csv(self, filename, data, overwrite=False):
-        df = pd.DataFrame.from_dict(data, orient="index")
         path = os.path.abspath("")
         data_folder = os.path.join(path, "data")
         access_file = os.path.join(data_folder, filename)
-    
         os.makedirs(os.path.dirname(access_file), exist_ok=True)
+        
+        df = pd.DataFrame.from_dict(data, orient="index")
         for col in self.columns[1:]:  
             if col not in df.columns:
                 df[col] = pd.NA
-        df = df[self.columns[1:]] 
-        df.index.name = "zimmo code" 
-        
+                
+        df.index.name = "zimmo code"
+
         if overwrite:
             df.to_csv(access_file, index=True)
+            
         else:
             df.to_csv(access_file, mode="a", index=True, header=False)
+
 
     def read_csv(self, filename):
         path = os.path.abspath("")
@@ -30,10 +32,6 @@ class Output:
         access_file = os.path.join(data_folder, filename)
         print(f"🔎 Preview data from {filename}")
         df = pd.read_csv(access_file)
-        
-        if "year built" in df.columns:
-            df["year built"] = pd.to_numeric(df["year built"], errors="coerce").astype("Int64")
-
         print(df.head())
 
     def output_info(self,filename):
