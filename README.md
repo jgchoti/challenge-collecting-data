@@ -44,7 +44,8 @@ This program will save data into `leaders.json` inside the `data/` folder
 
 ```csv
 zimmo code,type,price,street,number,postcode,city,living area(m²),ground area(m²),bedroom,bathroom,garage,garden,EPC(kWh/m²),renovation obligation,year built,mobiscore,url
-L97O9,Vakantiewoning (Huis),,,,8670,Oostduinkerke,40.0,105.0,2,1,,False,,False,,7.4,https://www.zimmo.be/nl/oostduinkerke-8670/te-koop/huis/L97O9/?search=eyJmaWx0ZXIiOiB7InN0YXR1cyI6IHsiaW4iOiBbIkZPUl9TQUxFIiwgIlRBS0VfT1ZFUiJdfSwgImNhdGVnb3J5IjogeyJpbiI6IFsiSE9VU0UiLCAiQVBBUlRNRU5UIl19LCAicHJpY
+L9M5W,Chalet (Huis),49000.0,Patrijzenpad,,2275,Gierle,,2607.0,1,,,False,,False,1986,5.9,/nl/gierle-2275/te-koop/huis/L9M5W/?search=eyJmaWx0ZXIiOiB7InN0YXR1cyI6IHsiaW4iOiBbIkZPUl9TQUxFIiwgIlRBS0VfT1ZFUiJdfSwgImNhdGVnb3J5IjogeyJpbiI6IFsiSE9VU0UiLCAiQVBBUlRNRU5UIl19LCAicHJpY2UiOiB7InVua25vd24iOiBmYWxzZSwgInJhbmdlIjogeyJtaW4iOiAwLCAibWF4IjogNDk5OTl9fX19
+
 ```
 
 ---
