@@ -54,14 +54,6 @@ L9M5W,Chalet (Huis),49000.0,Patrijzenpad,,2275,Gierle,,2607.0,1,,,False,,False,1
 
 The program will also ask user if they want to see preview in their terminal:
 
-```bash
-
-📖 Do you want preview results? ('y' to confirm):
-
-```
-
-The program will then show output in the terminal
-
 ```
 
 📖 Do you want preview results? ('y' to confirm):y
@@ -80,7 +72,6 @@ The program will then show output in the terminal
 ```
 
 The program ends by displaying the total runtime to fetch the data.
-(In the `nice-to-have` branch, this feature is replaced by a progress bar.)
 
 ```
 ==============⏰ Total web scraping is 2e+02 seconds=============
