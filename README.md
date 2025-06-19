@@ -93,3 +93,4 @@ The program ends by displaying the total runtime to fetch the data.
     - In increments of €50,000 per query range
     - For the final group (starting from €1,499,999), the max limit was left open to capture all remaining properties
     - **For future improvement** Use a script to automatically create these links by decoding the search filters from the `base64`.
+- Duplicated data: This program cleaned up data at the end of the scraping to remove any duplication 
