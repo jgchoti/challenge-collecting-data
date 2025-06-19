@@ -46,6 +46,7 @@ def scrap_price_ranges(scraper, output, filename):
             print(f"\n🔎 Done scraping listings in price range:{key} - Page: {page}")
             print(f"🗃️ Total properties scraped so far: {len(scraper.properties_data)}")
             page += 1
+            
 
 def main():
     print("\n🔍 Getting data...")
@@ -62,9 +63,9 @@ def main():
     end = time.perf_counter()
     user_input = input(f"\n📖 Do you want preview results? ('y' to confirm):")
     if user_input.lower() == "y":
-        output.read_csv()
+        output.read_csv(filename)
 
-    output.output_info()
+    output.output_info(filename)
     print(
         f"==============⏰ Total web scraping is {end-start:.2} seconds=============\n"
     )

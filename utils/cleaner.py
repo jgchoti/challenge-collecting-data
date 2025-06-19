@@ -51,11 +51,12 @@ class Cleaner:
 
     @staticmethod
     def cleaned_price(price):
-        cleaned_price = re.sub(r"[€\.]", "", price)
-        if cleaned_price.isdigit():
-            cleaned_price = cleaned_price.replace(",", ".")
-            return int(cleaned_price)
-        else:
+        cleaned = re.sub(r"[€\s]", "", price)
+        cleaned = cleaned.replace(".", "")
+        cleaned = cleaned.replace(",", ".")
+        try:
+            return float(cleaned)
+        except ValueError:
             return None
 
     @staticmethod

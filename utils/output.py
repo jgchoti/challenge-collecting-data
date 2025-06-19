@@ -24,27 +24,23 @@ class Output:
         else:
             df.to_csv(access_file, mode="a", index=True, header=False)
 
-    def read_csv(self):
-        latest_filename = self.get_latest_filename()
-        print(f"🔎 Preview data from {os.path.basename(latest_filename)}")
-        df = pd.read_csv(latest_filename)
+    def read_csv(self, filename):
+        path = os.path.abspath("")
+        data_folder = os.path.join(path, "data")
+        access_file = os.path.join(data_folder, filename)
+        print(f"🔎 Preview data from {filename}")
+        df = pd.read_csv(access_file)
         
         if "year built" in df.columns:
             df["year built"] = pd.to_numeric(df["year built"], errors="coerce").astype("Int64")
 
         print(df.head())
-        print(f"\n📊 Total properties in database: {len(df)}")
-        print("📌 Columns:", list(df.columns))
 
-    def output_info(self):
-        latest_filename = self.get_latest_filename()
-        df = pd.read_csv(latest_filename)
+    def output_info(self,filename):
+        path = os.path.abspath("")
+        data_folder = os.path.join(path, "data")
+        access_file = os.path.join(data_folder, filename)
+        df = pd.read_csv(access_file)
         print(f"\n🏡 Zimmo.be scraping complete — total properties: {len(df)}")
         print("📌 Columns:", list(df.columns))
         
-    def get_latest_filename(self):
-        path = os.path.abspath("")
-        data_folder = os.path.join(path, "data")
-        filenames_list = os.listdir(data_folder)
-        filenames_list.sort(key=os.path.getmtime)
-        return filenames_list[-1]
