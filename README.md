@@ -67,7 +67,7 @@ The program will also ask user if they want to see preview in their terminal:
 
 [5 rows x 18 columns]
 
-🏡 Zimmo.be scraping complete — total properties: 27918
+🏡 Zimmo.be scraping complete — total properties: 25403
 📌 Columns: ['zimmo code', 'type', 'price', 'street', 'number', 'postcode', 'city', 'living area(m²)', 'ground area(m²)', 'bedroom', 'bathroom', 'garage', 'garden', 'EPC(kWh/m²)', 'renovation obligation', 'year built', 'mobiscore', 'url']
 ```
 
