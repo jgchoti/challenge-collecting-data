@@ -41,7 +41,6 @@ While scraping, the program keeps the user informed after each page loop:
 
 This will start scraping property data from Zimmo.be, collecting pages and property details concurrently, and save the final cleaned dataset as `properties{MMDDHHMM}.csv`
 
-This program will save data into `leaders.json` inside the `data/` folder
 
 ### 📊 Sample Output in CSV
 
