@@ -44,10 +44,13 @@ class Cleaner:
 
     @staticmethod
     def remove_non_digits(text):
-        cleaned = re.sub(r"[^0-9]", "", str(text))
+        cleaned = text.replace(".", "")
+        cleaned= cleaned.replace(",", ".")
+        cleaned = re.sub(r"[^0-9.]", "", cleaned)  
+       
         if cleaned == "":
             return None
-        return int(cleaned)
+        return float(cleaned)
 
     @staticmethod
     def cleaned_price(price):
